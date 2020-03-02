@@ -6,9 +6,6 @@
 package PolinomioEnVectorF1;
 
 import PolinomiosLista.Polinomio;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import static java.lang.Math.*;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -18,14 +15,9 @@ import java.util.Scanner;
  * @author YAR
  */
 public class PolVectorForma1 {
-    
-private int[] arregloA;
 
-    //private ArrayList<Polinomio> ListaPolinomios;
-private ArrayList<Polinomio> ListaPolinomios;    
-Scanner entrada= new Scanner(System.in);
-    File Fichero = new File("DatosPol.txt");
-    
+    private int[] arregloA;
+
     /**
      * Constructor que crea un arreglo sin coeficientes de grado n
      *
@@ -253,243 +245,114 @@ Scanner entrada= new Scanner(System.in);
             polB = new PolVectorForma1();
         }
         return this.sumar(polB);
+    }
 
-    }
-    
-    /*
-    public PolVectorForma1 multiplicar(PolVectorForma1 polinomioB) throws Exception {
-         PolVectorForma1 polC;
-         
-        return polC;
-    }
-*/
-    
-         public void leerTxt(){ 
-        String texto = "";
-        try{
-            BufferedReader bf = new BufferedReader(new FileReader(Fichero));
-            String temp = "";
-            String bfRead;
-            while((bfRead = bf.readLine()) != null){ 
-                temp += bfRead +"\n"; //guardado el texto del archivo
+    public PolVectorForma1 Multiplicar(PolVectorForma1 p2) throws Exception {
+
+        //int[] Arreglo1 = getArreglo();
+        int[] Arreglo = getArreglo();
+        int[] Arreglo2 = p2.getArreglo();
+
+        PolVectorForma1 polNuevo = new PolVectorForma1();
+
+        for (int i = 1; i < Arreglo.length; i++) {
+
+            for (int j = 1; j < Arreglo2.length; j++) {
+
+                int mExp = getExponente(i) + p2.getExponente(j);
+                int mCoef = getCoeficiente(getExponente(i)) * p2.getCoeficiente(p2.getExponente(j));
+
+                polNuevo = polNuevo.sumar(mCoef, mExp);
+
             }
-            texto = temp;
-        }catch(Exception e){ 
-            System.err.println("No se encontro archivo");
         }
-        System.out.println(texto);
+        return polNuevo;
     }
-         
-         
-        /* public PolVectorForma1 Multiplicar(PolVectorForma1 p1 , PolVectorForma1 p2) throws Exception{
-             
-             PolVectorForma1 polC;
-             int[] Arreglo1 = p1.getArreglo();
-             int[] Arreglo2 = p2.getArreglo();
-             
-             int gradoC = p1.getGrado() + p2.getGrado();
-             int [] Arreglo3 = new int [gradoC + 2];
-             
-             Arreglo3[0]= gradoC;
-             
-             for(int i = 1 ; i < Arreglo3.length; i ++){
-                 Arreglo3[i] = 0;    
-             }
-             
-             polC = new PolVectorForma1(Arreglo3);
-             
-             for(int i = 1 ; i < Arreglo1.length; i++){
-             
-             for(int j = 1; j < Arreglo2.length ; j++ ){
-                 
-                 int mExp = polC.getExponente(j);
-                 int mCoef = p1.getCoeficiente(p1.getExponente(i)) * p2.getCoeficiente(p2.getExponente(j));
-                 polC.sumar(mCoef, mExp);
-             }
-             
-             
-         }
-             
-             return polC;
-         }
-         public PolVectorForma1 Multiplicar(PolVectorForma1 p2) throws Exception{
-             
-             PolVectorForma1 polC;
-             int[] Arreglo1 = getArreglo();
-             int[] Arreglo2 = p2.getArreglo();
-             
-             int gradoC = getGrado() + p2.getGrado();
-             int [] Arreglo3 = new int [gradoC + 2];
-             
-             Arreglo3[0]= gradoC;
-             
-             for(int i = 1 ; i < Arreglo3.length; i ++){
-                 Arreglo3[i] = 0;    
-             }
-             
-             polC = new PolVectorForma1(Arreglo3);
-             
-             for(int i = 1 ; i < Arreglo1.length; i++){
-             
-             for(int j = 1; j < Arreglo2.length ; j++ ){
-                 
-                 int mExp = polC.getExponente(j);
-                 int mCoef = getCoeficiente(getExponente(i)) * p2.getCoeficiente(p2.getExponente(j));
-                 
-                 
-             //polC.sumar(mCoef, mCoef);
 
-                 System.out.println(polC);
-             }
-             
-             
-         }
-             
-             return polC;
-         }
-*/
-         
-         public PolVectorForma1 Multiplicar(PolVectorForma1 p2) throws Exception{
-             
-             
-             //int[] Arreglo1 = getArreglo();
-             int[] Arreglo = getArreglo();
-             int[] Arreglo2 = p2.getArreglo();
-             
-             PolVectorForma1 polNuevo = new PolVectorForma1 ();
-             
-             for(int i = 1 ; i < Arreglo.length; i++){
-             
-             for(int j = 1; j < Arreglo2.length ; j++ ){
-                 
-                 int mExp = getExponente(i) + p2.getExponente(j);
-                 int mCoef = getCoeficiente(getExponente(i)) * p2.getCoeficiente(p2.getExponente(j));
-                 
-                 
-             polNuevo= polNuevo.sumar(mCoef, mExp);
-                 System.out.println(polNuevo);
+    public PolVectorForma1 Dividir(PolVectorForma1 p2) throws Exception {
 
-             }
-             
-             
-         }
-         
-             return polNuevo;
-             
-         }
-         
-                  public PolVectorForma1 Dividir(PolVectorForma1 p2) throws Exception{
-             
-             
-             int[] Arreglo = getArreglo();
-             int[] Arreglo2 = p2.getArreglo();
-             
-             
-             int gradoDivisor = getExponente(1) - p2.getExponente(1);
-             
-             PolVectorForma1 polDivisor = new PolVectorForma1 (gradoDivisor);
-             
-              PolVectorForma1 polResiduo = new PolVectorForma1 (getGrado());        
-             
-             
-             for(int i = 1 ; i < Arreglo2.length; i++){
-              
-                 if(i==1){
-             int expDivisor = getExponente(i) - p2.getExponente(i);  
-             int coeDivisor = getCoeficiente(getExponente(i)) / p2.getCoeficiente(p2.getExponente(i)) ;
-             
-             polDivisor.setCoeficiente(coeDivisor, expDivisor);
-             
-             for (int j =1 ; j < Arreglo2.length; j++ ){
-                 
-             int expResiduo = getExponente(j);  
-             int coeResiduo = polDivisor.getCoeficiente(polDivisor.getExponente(j)) * p2.getCoeficiente(p2.getExponente(j) * -1  + getCoeficiente(getExponente(j))) ;
-             
-             polResiduo.setCoeficiente(coeResiduo, expResiduo);
-             
-                 }} else {
-                     
-                     for(int k=1; k < Arreglo2.length; k++) {
-                  
-                    if (polResiduo.getCoeficiente(polResiduo.getExponente(k))== 0){
-                        
-                    } else{
-                        
-                       
-                   int expDivisor = polResiduo.getExponente(k) - p2.getExponente(i);  
-                   int coeDivisor = polResiduo.getCoeficiente(polResiduo.getExponente(k)) / p2.getCoeficiente(p2.getExponente(i)) ;  
-                     
-                   polResiduo.setCoeficiente(coeDivisor, expDivisor); 
-                         
-                                      for (int j =1 ; j < Arreglo2.length; j++ ){
-                 
-             int expResiduo = polResiduo.getExponente(k);  
-             int coeResiduo = polDivisor.getCoeficiente(polDivisor.getExponente(j)) * p2.getCoeficiente(p2.getExponente(j) * -1  + getCoeficiente(getExponente(j))) ;
-             
-             polResiduo.setCoeficiente(coeResiduo, expResiduo);
-                 }
-                         }
-            
-                 }
+        int[] Arreglo = getArreglo();
+        int[] Arreglo2 = p2.getArreglo();
 
-              
-             }
-                 
+        int gradoDivisor = getExponente(1) - p2.getExponente(1);
 
-             
-         }
-             
-             return polResiduo;
-             
-         }
-                  
-                  
-                           public PolVectorForma1 Derivar() throws Exception{
-             
-             
-             //int[] Arreglo1 = getArreglo();
-             int[] Arreglo = getArreglo();
-             int gradoNue = Arreglo[0] -1;
-             
-             PolVectorForma1 polNuevo = new PolVectorForma1 (gradoNue );
-             
-             
-             
-             
-             for(int i = 1 ; i < Arreglo.length - 1; i++){
-             
-             polNuevo.setCoeficiente(Arreglo [i] *  getExponente(i), getExponente(i) -1);                 
-             
-         }
-         
-                 System.out.println(polNuevo);
-             return polNuevo;
-             
-         }
-                           
-            public int Evaluar(int dato) throws Exception{
-             
-             int resultado= 0;
-                
-             //int[] Arreglo1 = getArreglo();
-             int[] Arreglo = getArreglo();
-                          
-             
-             
-             for(int i = 1 ; i < Arreglo.length; i++){
-             
-             resultado = resultado + Arreglo[i]* (int) Math.pow(dato, getExponente(i));
-              
-                             
-                
-             
-                        
-             
-             
-         }
-         
-             
-             return resultado;
-             
-         }
+        PolVectorForma1 polDivisor = new PolVectorForma1(gradoDivisor);
+
+        PolVectorForma1 polResiduo = new PolVectorForma1(getGrado());
+
+        for (int i = 1; i < Arreglo2.length; i++) {
+
+            if (i == 1) {
+                int expDivisor = getExponente(i) - p2.getExponente(i);
+                int coeDivisor = getCoeficiente(getExponente(i)) / p2.getCoeficiente(p2.getExponente(i));
+
+                polDivisor.setCoeficiente(coeDivisor, expDivisor);
+
+                for (int j = 1; j < Arreglo2.length; j++) {
+
+                    int expResiduo = getExponente(j);
+                    int coeResiduo = polDivisor.getCoeficiente(polDivisor.getExponente(j)) * p2.getCoeficiente(p2.getExponente(j) * -1 + getCoeficiente(getExponente(j)));
+
+                    polResiduo.setCoeficiente(coeResiduo, expResiduo);
+
+                }
+            } else {
+
+                for (int k = 1; k < Arreglo2.length; k++) {
+
+                    if (polResiduo.getCoeficiente(polResiduo.getExponente(k)) == 0) {
+
+                    } else {
+
+                        int expDivisor = polResiduo.getExponente(k) - p2.getExponente(i);
+                        int coeDivisor = polResiduo.getCoeficiente(polResiduo.getExponente(k)) / p2.getCoeficiente(p2.getExponente(i));
+
+                        polResiduo.setCoeficiente(coeDivisor, expDivisor);
+
+                        for (int j = 1; j < Arreglo2.length; j++) {
+
+                            int expResiduo = polResiduo.getExponente(k);
+                            int coeResiduo = polDivisor.getCoeficiente(polDivisor.getExponente(j)) * p2.getCoeficiente(p2.getExponente(j) * -1 + getCoeficiente(getExponente(j)));
+
+                            polResiduo.setCoeficiente(coeResiduo, expResiduo);
+                        }
+                    }
+
+                }
+
+            }
+
+        }
+        return polResiduo;
+    }
+
+    public PolVectorForma1 Derivar() throws Exception {
+
+        //int[] Arreglo1 = getArreglo();
+        int[] Arreglo = getArreglo();
+        int gradoNue = Arreglo[0] - 1;
+
+        PolVectorForma1 polNuevo = new PolVectorForma1(gradoNue);
+
+        for (int i = 1; i < Arreglo.length - 1; i++) {
+
+            polNuevo.setCoeficiente(Arreglo[i] * getExponente(i), getExponente(i) - 1);
+        }
+        return polNuevo;
+
+    }
+
+    public int Evaluar(int dato) throws Exception {
+
+        int resultado = 0;
+
+        //int[] Arreglo1 = getArreglo();
+        int[] Arreglo = getArreglo();
+
+        for (int i = 1; i < Arreglo.length; i++) {
+
+            resultado = resultado + Arreglo[i] * (int) Math.pow(dato, getExponente(i));
+        }
+        return resultado;
+    }
 }
