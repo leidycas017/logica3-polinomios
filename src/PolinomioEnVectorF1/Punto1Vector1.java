@@ -5,15 +5,24 @@
  */
 package PolinomioEnVectorF1;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 /**
- *
- * @author YAR
+ * Permite el ingreso de varios polinomios (solicitando cada uno de sus términos), sobre los cuales se puede realizar operaciones como:
+ * - Sumar o restar (según el caso sobre el mismo polinomio), es decir; ir simplificando.
+ * - Permite mostrar en la pantalla los polinomios ingresados en cualquier momento (todos a la vez ó el que el usuario quiera buscar mediante el orden de ingreso previo).
+ * - Multiplicar dos polinomios de los ingresados y guardados previamente en memoria, y se crea un nuevo polinomio que es mostrado al usuario.
+ * - Dividir dos polinomios de los ingresados y guardados previamente en memoria, y se crea un nuevo polinomio que es mostrado al usuario.
+ * - Derivar cualquiera de los polinomios que están en memoria.
+ * - Evaluar el polinomio, es decir, se entrega el valor de la variable y se retorna el resultado.
+ * @author: Yuly Alvear
+ * @author: Brian Vanegas
+ * @author: Leidy Castaño
+ * @author: Emiro
+ * @version: 03/03/2020/A
+ * @see <a href = "https://github.com/YulyAR/logica3-polinomios.git" /> Url de Repositorio en Github - Polinomio representado en Vector Forma1 </a>
  */
 public class Punto1Vector1 {
 
