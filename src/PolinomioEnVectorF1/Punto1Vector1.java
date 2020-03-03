@@ -7,6 +7,8 @@ package PolinomioEnVectorF1;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -17,25 +19,37 @@ public class Punto1Vector1 {
 
     public static void main(String[] args) throws Exception {
 
-        int polinomios = 1;
         char opcion = 0;
 
         int Ex = 0;
         int Co = 0;
         Scanner teclado = new Scanner(System.in);
-
-        PolVectorForma1 A = new PolVectorForma1();
-        PolVectorForma1 B = new PolVectorForma1();
-        PolVectorForma1 C = new PolVectorForma1();
-        PolVectorForma1 D = new PolVectorForma1();
-        PolVectorForma1 E = new PolVectorForma1();
-        PolVectorForma1 F = new PolVectorForma1();
-        PolVectorForma1 G = new PolVectorForma1();
-        PolVectorForma1 H = new PolVectorForma1();
-        PolVectorForma1 I = new PolVectorForma1();
-        PolVectorForma1 J = new PolVectorForma1();
-
+        List<PolVectorForma1> misPolinomios = new ArrayList<>();
+        
         do {
+            System.out.println("\nIngreso de terminos del polinomio numero " + (misPolinomios.size() + 1) + ", para finalizar digite -999");
+
+            PolVectorForma1 polinomio = new PolVectorForma1();
+
+            do {
+                while (Co != 999) {
+                    System.out.println("Ingrese el coeficiente");
+                    Co = teclado.nextInt();
+
+                    if (Co != 999) {
+                        System.out.println("Ingrese el exponente");
+                        Ex = teclado.nextInt();
+                        polinomio = polinomio.sumar(Co, Ex);
+                    }
+                }
+            } while (Co != 999);
+            System.out.println(polinomio);
+            misPolinomios.add(polinomio);
+            Co = 0;
+
+        } while(misPolinomios.size() <= 3);
+
+        /*do {
             System.out.println("\nIngreso de terminos del polinomio numero " + polinomios + ", para finalizar digite -999");
 
             switch (polinomios) {
@@ -207,7 +221,7 @@ public class Punto1Vector1 {
             Co = 0;
             polinomios++;
 
-        } while (polinomios < 10);
+        } while (polinomios < 10);*/
 
         do {
             opcion = menu();
@@ -219,7 +233,7 @@ public class Punto1Vector1 {
                     System.out.println("Ingrese el numero del polinomio que desea ver, si quiere verlos todos ingrese 0");
                     int pol = teclado.nextInt();
 
-                    switch (pol) {
+                    /*switch (pol) {
                         case 1:
                             System.out.println("1. "+A);
                             break;
@@ -269,7 +283,7 @@ public class Punto1Vector1 {
                             System.out.println("El polinomio no existe");
                             break;
 
-                    }
+                    }*/
                     break;
 
                 case '2':
@@ -277,7 +291,7 @@ public class Punto1Vector1 {
                     System.out.println("Eliga el primer polinomio que desea multiplicar");
                     int pol1 = teclado.nextInt();
 
-                    PolVectorForma1 polA = A;
+                    /*PolVectorForma1 polA = A;
 
                     if (pol1 == 2) {
                         polA = B;
@@ -351,7 +365,7 @@ public class Punto1Vector1 {
 
                     polC = polA.Multiplicar(polB);
 
-                    System.out.println("El resultado de a multiplicacion es: "+polC);
+                    System.out.println("El resultado de a multiplicacion es: "+polC);*/
 
                     break;
 
@@ -360,7 +374,7 @@ public class Punto1Vector1 {
                     break;
 
                 case '4':
-                    System.out.println("Eliga el polinomio que desea derivar");
+                    /*System.out.println("Eliga el polinomio que desea derivar");
                     int polD = teclado.nextInt();
 
                     if (polD == 1) {
@@ -392,7 +406,7 @@ public class Punto1Vector1 {
                     }
                     if (polD == 10) {
                         System.out.println("El resultado al derivar es: "+J.Derivar());
-                    }
+                    }*/
 
                     break;
 
@@ -404,7 +418,7 @@ public class Punto1Vector1 {
                     System.out.println("Ingrese el valor a evaluar");
                     int valor = teclado.nextInt();
 
-                    if (polE == 1) {
+                    /*if (polE == 1) {
                         System.out.println("El resultado es: " + A.Evaluar(valor));
                     }
                     if (polE == 2) {
@@ -433,7 +447,7 @@ public class Punto1Vector1 {
                     }
                     if (polE == 10) {
                         System.out.println("El resultado es: " + J.Evaluar(valor));
-                    }
+                    }*/
 
                     break;
 
