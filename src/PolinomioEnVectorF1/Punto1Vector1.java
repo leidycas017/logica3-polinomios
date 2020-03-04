@@ -98,6 +98,26 @@ public class Punto1Vector1 {
 
                 case '3':
 
+                    System.out.println("Eliga el polinomio a dividir");
+                    int pol3 = teclado.nextInt();
+
+                    PolVectorForma1 polAD = misPolinomios.get(pol3 - 1);
+
+                    System.out.println("Eliga el polinomio divisor");
+                    int pol4 = teclado.nextInt();
+
+                    PolVectorForma1 polBD = misPolinomios.get(pol4 - 1);
+
+                    System.out.println(polAD);
+                    System.out.println(polBD);
+
+                    PolVectorForma1 polCD;
+
+                    polCD = new PolVectorForma1();
+                    polCD = polCD.dividir(polAD, polBD);
+
+                    System.out.println("El resultado de la division es: " + polCD);
+
                     break;
 
                 case '4':

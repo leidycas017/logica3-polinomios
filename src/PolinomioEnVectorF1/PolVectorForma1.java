@@ -95,6 +95,10 @@ public class PolVectorForma1 {
     public String toString() {
         StringBuilder polinomio = new StringBuilder();
         try {
+            if (arregloA[0] == -1) {
+                polinomio.append("0");
+            }
+            
             for (int i = 1; i < arregloA.length; i++) {
                 int j = arregloA[i];
                 // Para adicionar el simbolo del coeficiente para numeros positivos, excluyendo el simbolo + del primer termino si es positivo.
@@ -268,61 +272,33 @@ public class PolVectorForma1 {
         return polNuevo;
     }
 
-    public PolVectorForma1 Dividir(PolVectorForma1 p2) throws Exception {
+    public PolVectorForma1 dividir(PolVectorForma1 dividendo, PolVectorForma1 divisor) throws Exception {
+        PolVectorForma1 cociente = new PolVectorForma1();
+        
+        PolVectorForma1 aux = new PolVectorForma1(1);
+            aux = aux.sumar(-1, 0);
 
-        int[] Arreglo = getArreglo();
-        int[] Arreglo2 = p2.getArreglo();
+        while (dividendo.getGrado() >= divisor.getGrado() ) {
+            
+            int a = dividendo.getCoeficiente(dividendo.getGrado());
+            int b = divisor.getCoeficiente(divisor.getGrado());
 
-        int gradoDivisor = getExponente(1) - p2.getExponente(1);
+            int coeficiente = a / b;
+            int exponente = dividendo.getExponente(1) - divisor.getExponente(1);
 
-        PolVectorForma1 polDivisor = new PolVectorForma1(gradoDivisor);
+            cociente.sumar(coeficiente, exponente);
 
-        PolVectorForma1 polResiduo = new PolVectorForma1(getGrado());
+            PolVectorForma1 nuevo = new PolVectorForma1();
+            nuevo= nuevo.sumar(coeficiente, exponente);
 
-        for (int i = 1; i < Arreglo2.length; i++) {
-
-            if (i == 1) {
-                int expDivisor = getExponente(i) - p2.getExponente(i);
-                int coeDivisor = getCoeficiente(getExponente(i)) / p2.getCoeficiente(p2.getExponente(i));
-
-                polDivisor.setCoeficiente(coeDivisor, expDivisor);
-
-                for (int j = 1; j < Arreglo2.length; j++) {
-
-                    int expResiduo = getExponente(j);
-                    int coeResiduo = polDivisor.getCoeficiente(polDivisor.getExponente(j)) * p2.getCoeficiente(p2.getExponente(j) * -1 + getCoeficiente(getExponente(j)));
-
-                    polResiduo.setCoeficiente(coeResiduo, expResiduo);
-
-                }
-            } else {
-
-                for (int k = 1; k < Arreglo2.length; k++) {
-
-                    if (polResiduo.getCoeficiente(polResiduo.getExponente(k)) == 0) {
-
-                    } else {
-
-                        int expDivisor = polResiduo.getExponente(k) - p2.getExponente(i);
-                        int coeDivisor = polResiduo.getCoeficiente(polResiduo.getExponente(k)) / p2.getCoeficiente(p2.getExponente(i));
-
-                        polResiduo.setCoeficiente(coeDivisor, expDivisor);
-
-                        for (int j = 1; j < Arreglo2.length; j++) {
-
-                            int expResiduo = polResiduo.getExponente(k);
-                            int coeResiduo = polDivisor.getCoeficiente(polDivisor.getExponente(j)) * p2.getCoeficiente(p2.getExponente(j) * -1 + getCoeficiente(getExponente(j)));
-
-                            polResiduo.setCoeficiente(coeResiduo, expResiduo);
-                        }
-                    }
-
-                }
-
-            }
-
+            PolVectorForma1 producto = new PolVectorForma1();
+            
+            producto = divisor.Multiplicar(nuevo);
+            producto = producto.Multiplicar(aux);
+            dividendo = dividendo.sumar(producto);
         }
-        return polResiduo;
+
+        return cociente;
     }
 
     public PolVectorForma1 Derivar() throws Exception {
