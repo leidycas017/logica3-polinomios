@@ -5,7 +5,6 @@
  */
 package PolinomioEnVectorF1;
 
-import PolinomiosLista.Polinomio;
 import static java.lang.Math.*;
 import java.util.ArrayList;
 import java.util.Scanner;
